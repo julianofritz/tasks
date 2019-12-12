@@ -12,7 +12,7 @@ class StatusTableSeeder extends Seeder
     public function run()
     {
         DB::table('status')->insert([
-            'name' => 'Criado'
+            'name' => 'Aberto'
         ]);
 
         DB::table('status')->insert([
@@ -20,11 +20,11 @@ class StatusTableSeeder extends Seeder
         ]);
 
         DB::table('status')->insert([
-            'name' => 'Em Desenvolvimento'
+            'name' => 'Em Andamento'
         ]);
 
         DB::table('status')->insert([
-            'name' => 'Resolvido'
+            'name' => 'Concluído'
         ]);
     }
 }

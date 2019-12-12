@@ -13,7 +13,7 @@ class CreateTaskStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_statuses', function (Blueprint $table) {
+        Schema::create('task_status', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('status_id')->unsigned();
             $table->bigInteger('task_id')->unsigned();
@@ -32,6 +32,6 @@ class CreateTaskStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_statuses');
+        Schema::dropIfExists('task_status');
     }
 }

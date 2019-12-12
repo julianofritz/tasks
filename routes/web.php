@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    Route::resource('task', 'TaskController');
+
+    Route::get('remove/{id}', 'TaskController@remove')->name('task.remove');
+});
