@@ -16,7 +16,7 @@
                     <div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <label for="Title" class="">Titulo</label>
-                            <input class="form-control" id="title" name="title" autocomplete="title" autofocus />
+                            <input class="form-control" id="title" name="title" value={{ data.task.title }} autocomplete="title" autofocus />
                         </div>
                     </div>
 
@@ -24,8 +24,12 @@
                         <div class="col-md-6 mb-3">
                             <label for="company_id" class="">Empresa</label>
                             <select class="form-control" name="company_id">
-                                {% for company in companies %}
-                                    <option value={{ company.id }}> {{ company.name }} </option>
+                                {% for company in data.companies %}
+                                    {% if company.id == data.task.company_id %}
+                                        <option selected="selected" value={{ company.id }}> {{ company.name }} </option>
+                                    {% else %}
+                                        <option value={{ company.id }}> {{ company.name }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -35,8 +39,12 @@
                         <div class="col-md-6 mb-3">
                             <label for="company_id" class="">Canal</label>
                             <select class="form-control" name="channel_id">
-                                {% for channel in channels %}
-                                    <option value={{ channel.id }}> {{ channel.name }} </option>
+                                {% for channel in data.channels %}
+                                    {% if channel.id == data.task.channel_id %}
+                                        <option select="selected" value={{ channel.id }}> {{ channel.name }} </option>
+                                    {% else %}
+                                        <option value={{ channel.id }}> {{ channel.name }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -46,8 +54,12 @@
                         <div class="col-md-6 mb-3">
                             <label for="module_id" class="">Módulo</label>
                             <select class="form-control" name="module_id">
-                                {% for module in modules %}
-                                    <option value={{ module.id }}> {{ module.name }} </option>
+                                {% for module in data.modules %}
+                                    {% if module.id == data.task.module_id %}
+                                        <option select="selected" value={{ module.id }}> {{ module.name }} </option>
+                                    {% else %}
+                                        <option value={{ module.id }}> {{ module.name }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -57,8 +69,12 @@
                         <div class="col-md-6 mb-3">
                             <label for="user_id" class="">Atendente</label>
                             <select class="form-control" name="user_id">
-                                {% for user in users %}
-                                    <option value={{ user.id }}> {{ user.email }} </option>
+                                {% for user in data.users %}
+                                    {% if user.id == data.task.user_id %}
+                                        <option select="selected" value={{ user.id }}> {{ user.email }} </option>
+                                    {% else %}
+                                        <option value={{ user.id }}> {{ user.email }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -68,8 +84,27 @@
                         <div class="col-md-6 mb-3">
                             <label for="task_type_id" class="">Tipo</label>
                             <select class="form-control" name="task_type_id">
-                                {% for taskType in taskTypes %}
-                                    <option value={{ taskType.id }}> {{ taskType.name }} </option>
+                                {% for taskType in data.taskTypes %}
+                                    {%  if taskType.id == data.task.task_type_id %}
+                                        <option select="selected" value={{ taskType.id }}> {{ taskType.name }} </option>
+                                    {% else %}
+                                        <option value={{ taskType.id }}> {{ taskType.name }} </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-3">
+                            <label for="status_id" class="">Tipo</label>
+                            <select class="form-control" name="status_id">
+                                {% for status in data.status %}
+                                    {%  if status.id == data.task.status_id %}
+                                        <option select="selected" value={{ status.id }}> {{ status.name }} </option>
+                                    {% else %}
+                                        <option value={{ status.id }}> {{ status.name }} </option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
@@ -78,18 +113,19 @@
                     <div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <label for="user_name" class="">Usuário</label>
-                            <input class="form-control" id="user_name" name="user_name" autocomplete="user_name" autofocus />
+                            <input class="form-control" id="user_name" name="user_name" value={{ data.task.user_name }} autocomplete="user_name" autofocus />
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-md-6 mb-3">
                             <label for="description" class="">Descrição</label>
-                            <textarea id="description" name="description"></textarea>
+                            <textarea id="description" name="description">{{ data.task.description }}</textarea>
                         </div>
                     </div>
 
                     <div class="text-right my-4">
+                    <a href={{ route('task.index') }} class="btn btn-primary">Voltar</a>
                         <button form="form" type="submit" class="btn btn-primary">Registrar</button>
                     </div>
 

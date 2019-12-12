@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Company;
 use App\Module;
+use App\Status;
 use App\Task;
 use App\TaskStatus;
 use App\TaskType;
@@ -101,6 +102,7 @@ class TaskController extends Controller
             'modules'   => Module::all(),
             'users'     => User::all(),
             'taskTypes' => TaskType::all(),
+            'status'    => Status::all(),    
             'task'      => $task,
         ];
         
