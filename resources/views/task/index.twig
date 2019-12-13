@@ -5,42 +5,61 @@
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-primary btn-lg" href={{ route('task.create') }} role="button">Novo Chamado</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#ID</th>
-                <th scope="col">Empresa</th>
-                <th scope="col">Usuário</th>
-                <th scope="col">Atendente</th>
-                <th scope="col">Canal</th>
-                <th scope="col">Data</th>
-                <th scope="col">Ação</th>
-            </tr>
-        </thead>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <div class="row">
+                    <div class="col">
+                        <h2 class="card-title mb-0">Listagem de chamados</h2>
+                    </div>
+                    <div class="col text-right">
 
-        <tbody>
-
-            {% for task in tasks %}
-                <tr>
-                    <td> {{ task.id }} </td>
-                    <td> {{ task.company.name }} </td>
-                    <td> {{ task.user_name }} </td>
-                    <td> {{ task.user.email }} </td>
-                    <td> {{ task.channel.name }}
-                    <td> {{ task.date|date("d/m/Y h:i:s") }} </td>
-                    <td>
-                        <a href={{ route('task.show', task.id) }} data-toggle="tooltip" class="btn btn-success" data-placement="top" title="Visulizar" >
-                            <i class="fas fa-eye"></i>
+                        <a class="btn btn-primary btn-lg" href={{ route('task.create') }} data-toggle="tooltip" data-placement="top" title="Novo Chamado">
+                            <i class="fas fa-plus"></i>
                         </a>
-                        <a href={{ route('task.remove', task.id) }} data-method="DELETE" data-toggle="tooltip" class="btn btn-danger" data-placement="top" title="Excluir" >
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
 
-        </tbody>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Atendente</th>
+                        <th scope="col">Canal</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Ação</th>
+                        <th scope="col">
+                        </th>
+                    </tr>
+                </thead>
 
-    </table>
+                <tbody>
+
+                    {% for task in tasks %}
+                        <tr>
+                            <td> {{ task.id }} </td>
+                            <td> {{ task.company.name }} </td>
+                            <td> {{ task.user_name }} </td>
+                            <td> {{ task.user.email }} </td>
+                            <td> {{ task.channel.name }}
+                            <td> {{ task.date|date("d/m/Y h:i:s") }} </td>
+                            <td>
+                                <a href={{ route('task.show', task.id) }} data-toggle="tooltip" class="btn btn-primary" data-placement="top" title="Visulizar" >
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href={{ route('task.remove', task.id) }} data-method="DELETE" data-toggle="tooltip" class="btn btn-danger" data-placement="top" title="Excluir" >
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 {% endblock %}

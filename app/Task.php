@@ -11,7 +11,17 @@ class Task extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'name',
+        'title',
+        'company_id',
+        'channel_id',
+        'module_id',
+        'user_id',
+        'task_type_id',
+        'date',
+        'user_name',
+        'description',
+        'solution_description',
+        'removed',
     ];
 
     public $timestamps = false;

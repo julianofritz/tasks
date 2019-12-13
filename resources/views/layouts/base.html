@@ -8,13 +8,26 @@
         {% endblock %}
     </head>
     <body>
-        <div id="content">
-            {% if auth_check() %}
-                <div>
-                    <a href="{{ url('/logout') }}"> logout </a>
+
+
+        <nav id="content">
+
+            <nav class="navbar navbar-dark bg-light" style="border-bottom: 1px solid #ddd;">
+                <div class="container">
+                    <div class="col">
+                        <a href={{ route('task.index') }}><h3>Lorem ipsum</h3>
+                        <h5>dolor sit amet</h5></a>
+                    </div>
+                    <div class="col text-right">
+
+                        {% if auth_check() %}
+                            <a href="{{ url('/logout') }}"> logout </a>
+                        {% endif %}
+                    </div>
                 </div>
-            {% endif %}
-            <div class="container">
+            </nav>
+
+            <div class="container mt-5">
                 <div class="row justify-content-center">
                     {% block content %}{% endblock %}
                 </div>
@@ -22,11 +35,13 @@
         </div>
 
 
-        <div id="footer">
-            <div class="row justify-content-center">
-                {% block footer %}
-                    &copy; Copyright 2019 by <a href="https://github.com/julianofritz">Juliano Fritz Basso</a>.
-                {% endblock %}
+        <div id="footer mt-5">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    {% block footer %}
+                        &copy; Copyright 5019 by <a href="https://github.com/julianofritz">Juliano Fritz Basso</a>.
+                    {% endblock %}
+                </div>
             </div>
         </div>
 

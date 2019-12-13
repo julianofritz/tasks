@@ -75,6 +75,7 @@ class TaskController extends Controller
         $taskStatus->status_id   = 1;
         $taskStatus->task_id     = $task->id;
         $taskStatus->user_id     = $request->user_id;
+        $taskStatus->date        = date('Y-m-d h:i:s');
         $taskStatus->save();
 
         return redirect()->route('task.index');

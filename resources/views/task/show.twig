@@ -6,60 +6,57 @@
 
 {% block content %}
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">#{{ task.id }} - {{ task.title }}</h5>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header text-white bg-primary">
+                <h5 class="card-title m-0">#{{ data.task.id }} - {{ data.task.title }}</h5>
 
-            <p class="card-text">{{ task.description }}</p>
-        </div>
-
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Data: {{ data.task.date|date("d/m/Y h:i:s") }}</li>
-            <li class="list-group-item">Empresa: {{ data.task.company.name }}</li>
-            <li class="list-group-item">Canal: {{ data.task.channel.name }}</li>
-            <li class="list-group-item">Modulo: {{ data.task.module.name }}</li>
-            <li class="list-group-item">Atendente: {{ data.task.user.name }}</li>
-            <li class="list-group-item">Status: {{ data.task.actualStatusName() }}</li>
-        </ul>
-
-        <div class="card-body">
-            <a href={{ route('task.edit', data.task.id) }} class="btn btn-success">Editar</a>
-            <a href={{ route('task.index') }} class="btn btn-primary">Voltar</a>
+                <p class="card-text">{{ task.description }}</p>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Data: {{ data.task.date|date("d/m/Y h:i:s") }}</li>
+                    <li class="list-group-item">Empresa: {{ data.task.company.name }}</li>
+                    <li class="list-group-item">Canal: {{ data.task.channel.name }}</li>
+                    <li class="list-group-item">Modulo: {{ data.task.module.name }}</li>
+                    <li class="list-group-item">Atendente: {{ data.task.user.name }}</li>
+                    <li class="list-group-item">Status: {{ data.task.actualStatusName() }}</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <a href={{ route('task.index') }} class="btn btn-secondary">Voltar</a>
+                <a href={{ route('task.edit', data.task.id) }} class="btn btn-primary">Editar</a>
+            </div>
         </div>
     </div>
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Histórico de troca de status</h5>
+    <div class="col-12 mt-3">
 
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="card-title mb-0">Histórico de troca de status</h5>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Atendente</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for status in data.statusHistory %}
+                        <tr>
+                            <td> {{ status.user.name }} </td>
+                            <td> {{ status.status.name }} </td>
+                            <td> {{ status.date|date("d/m/Y h:i:s") }} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Atendente</th>
-                <th scope="col">Status</th>
-                <th scope="col">Data</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            {% for status in data.statusHistory %}
-                <tr>
-                    <td> {{ status.user.name }} </td>
-                    <td> {{ status.status.name }} </td>
-                    <td> {{ status.date|date("d/m/Y h:i:s") }} </td>
-                </tr>
-            {% endfor %}
-
-        </tbody>
-
-    </table>
-
-
-
-
     </div>
+
+
 
 {% endblock %}
