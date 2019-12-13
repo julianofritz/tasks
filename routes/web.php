@@ -13,9 +13,9 @@
 
 Auth::routes();
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::resource('task', 'TaskController');
+Route::resource('task', 'TaskController')->middleware('auth');
 
-    Route::get('remove/{id}', 'TaskController@remove')->name('task.remove');
-    Route::post('update/{id}', 'TaskController@update')->name('task.postupdate');
-});
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('/login');
+Route::get('remove/{id}', 'TaskController@remove')->name('task.remove')->middleware('auth');
+Route::post('update/{id}', 'TaskController@update')->name('task.postupdate')->middleware('auth');
+Route::get('/logout', 'Auth\LoginController@logout')->middleware('auth');

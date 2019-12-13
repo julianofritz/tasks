@@ -88,9 +88,12 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $task = Task::findOrFail($id);
-        
-        return \View('task.show', compact('task'));
+        $data = [
+            'task'          => Task::findOrFail($id),
+            'statusHistory' => TaskStatus::where('task_id', $id)->get(),
+        ];
+
+        return \View('task.show', compact('data'));
     }
 
     /**
@@ -150,6 +153,7 @@ class TaskController extends Controller
         $taskStatus->status_id   = $request->status_id;
         $taskStatus->task_id     = $task->id;
         $taskStatus->user_id     = $request->user_id;
+        $taskStatus->date        = date('Y-m-d h:i:s');
         $taskStatus->save();
 
         return redirect()->route('task.index');
