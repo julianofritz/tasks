@@ -18,6 +18,7 @@ class CreateTaskStatusesTable extends Migration
             $table->bigInteger('status_id')->unsigned();
             $table->bigInteger('task_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->dateTime('date');
             
             $table->foreign('status_id')->references('id')->on('status');
             $table->foreign('task_id')->references('id')->on('tasks');

@@ -226,7 +226,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Twig' => TwigBridge\Facades\Twig::class,
+        'Twig' => TwigBridge\Facade\Twig::class,
     ],
 
 ];

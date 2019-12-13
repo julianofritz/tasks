@@ -11,6 +11,7 @@ use App\TaskStatus;
 use App\TaskType;
 use App\User;
 use Illuminate\Http\Request;
+use TwigBridge\Facade\Twig;
 
 class TaskController extends Controller
 {
@@ -52,6 +53,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'user_name' => 'required',
+            'description' => 'required',
+        ]);
+
         $task               = new Task();
         $task->title        = $request->title;
         $task->company_id   = $request->company_id;
@@ -61,7 +68,7 @@ class TaskController extends Controller
         $task->date         = date('Y-m-d h:i:s');
         $task->user_name    = $request->user_name;
         $task->description  = $request->description;
-        $task->task_type_id = $request->task_type_id;  
+        $task->task_type_id = $request->task_type_id;
         $task->save();
 
         $taskStatus              = new TaskStatus();
@@ -102,11 +109,13 @@ class TaskController extends Controller
             'modules'   => Module::all(),
             'users'     => User::all(),
             'taskTypes' => TaskType::all(),
-            'status'    => Status::all(),    
+            'status'    => Status::all(),
             'task'      => $task,
         ];
+
+        return Twig::render('task.edit', compact('data'));
         
-        return \View('task.edit', compact('data'));
+        //return view('task.edit', compact('data'));
     }
 
     /**
@@ -118,7 +127,32 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'user_name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $task = Task::findOrFail($id);
+        $task->title                = $request->title;
+        $task->company_id           = $request->company_id;
+        $task->channel_id           = $request->channel_id;
+        $task->module_id            = $request->module_id;
+        $task->user_id              = $request->user_id;
+        $task->date                 = date('Y-m-d h:i:s');
+        $task->user_name            = $request->user_name;
+        $task->description          = $request->description;
+        $task->solution_description = $request->solution_description;
+        $task->task_type_id         = $request->task_type_id;
+        $task->save();
+
+        $taskStatus              = new TaskStatus();
+        $taskStatus->status_id   = $request->status_id;
+        $taskStatus->task_id     = $task->id;
+        $taskStatus->user_id     = $request->user_id;
+        $taskStatus->save();
+
+        return redirect()->route('task.index');
     }
 
     /**

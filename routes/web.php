@@ -17,4 +17,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('task', 'TaskController');
 
     Route::get('remove/{id}', 'TaskController@remove')->name('task.remove');
+    Route::post('update/{id}', 'TaskController@update')->name('task.postupdate');
 });

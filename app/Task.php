@@ -45,4 +45,9 @@ class Task extends Model
     {
         return $this->status()->pluck('name')->last();
     }
+
+    public function actualStatusId()
+    {
+        return $this->status()->pluck('status_id')->last();
+    }
 }
